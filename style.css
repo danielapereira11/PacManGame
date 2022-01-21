@@ -41,7 +41,7 @@ h2 {
 .pacdots {
   background-color: rgb(35, 158, 35);
   box-sizing: border-box;
-  border: 6px solid white;
+  border: 7.5px solid white;
 }
 
 .ghost-lair {
@@ -49,6 +49,6 @@ h2 {
 }
 
 .powerpellets {
-  background-color: greenyellow;
+  background-color: rgb(35, 158, 35);
   border-radius: 50%;
 }
