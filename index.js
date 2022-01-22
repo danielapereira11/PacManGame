@@ -3,7 +3,7 @@ const grid = document.getElementById("grid");
 let squares = [];
 let width = 28;
 let score = 0;
-let pacManStartingIndex = 490;
+let pacManIndex = 490;
 let direction;
 
 // SETTING A PREVIOUSLY DEFINED LAYOUT, THAT WILL BE ATTRIBUTED TO THE GAMEBOARD
@@ -72,7 +72,7 @@ createBoard();
 // CREATING THE GAME PLAYERS
 function createPlayers() {
   //  ADDING PACMAN TO GAME BOARD
-  squares[pacManStartingIndex].classList.add("pacman");
+  squares[pacManIndex].classList.add("pacman");
 
   //   ADDING GHOSTS TO GAME BOARD
   squares[347].classList.add("clyde", "ghost");
@@ -84,23 +84,31 @@ createPlayers();
 
 // MOVE PACMAN UPON PRESSING ARROW KEYS
 function movingPacMan() {
-  squares[pacManStartingIndex].classList.remove("pacman");
-  pacManStartingIndex += direction;
-  squares[pacManStartingIndex].classList.add("pacman");
+  if (
+    !squares[pacManIndex + direction].classList.contains("wall") &&
+    !squares[pacManIndex + direction].classList.contains("ghost-lair")
+  ) {
+    squares[pacManIndex].classList.remove("pacman");
+    pacManIndex += direction;
+    squares[pacManIndex].classList.add("pacman");
+  }
 }
 
 // ADDING PACMAN DIRECTIONS USING THE KEYBOARD KEYS
 function controlKeys(event) {
   if (event.key === "ArrowLeft") {
     direction = -1;
+    movingPacMan();
   } else if (event.key === "ArrowRight") {
     direction = 1;
+    movingPacMan();
   } else if (event.key === "ArrowDown") {
     direction = width;
+    movingPacMan();
   } else if (event.key === "ArrowUp") {
     direction = -width;
+    movingPacMan();
   }
-  movingPacMan();
 }
 
 document.addEventListener("keydown", controlKeys);
