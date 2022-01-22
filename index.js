@@ -81,6 +81,14 @@ function createPlayers() {
   squares[377].classList.add("pinky", "ghost");
 }
 createPlayers();
+
+// MOVE PACMAN UPON PRESSING ARROW KEYS
+function movingPacMan() {
+  squares[pacManStartingIndex].classList.remove("pacman");
+  pacManStartingIndex += direction;
+  squares[pacManStartingIndex].classList.add("pacman");
+}
+
 // ADDING PACMAN DIRECTIONS USING THE KEYBOARD KEYS
 function controlKeys(event) {
   if (event.key === "ArrowLeft") {
@@ -92,6 +100,7 @@ function controlKeys(event) {
   } else if (event.key === "ArrowUp") {
     direction = -width;
   }
+  movingPacMan();
 }
 
 document.addEventListener("keydown", controlKeys);
