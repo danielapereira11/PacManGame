@@ -5,6 +5,7 @@ let width = 28;
 let score = 0;
 let pacManIndex = 490;
 let direction;
+// let ghostIsScared = false;
 
 // SETTING A PREVIOUSLY DEFINED LAYOUT, THAT WILL BE ATTRIBUTED TO THE GAMEBOARD
 const layout = [
@@ -91,6 +92,16 @@ function eatingPacdots() {
   }
 }
 
+// DEFINING WHAT HAPPENS WHEN PACMAN "EATS" A POWERPELLET
+function eatingPowerpellet() {
+  if (squares[pacManIndex].classList.contains("powerpellets")) {
+    squares[pacManIndex].classList.remove("powerpellets");
+    score += 10;
+    scoreBoard.innerHTML = score;
+    // ghostIsScared = true; //Set this correctly when creating the class for Ghost and redifining them and then setting a timeout function to unscare ghosts
+  }
+}
+
 // MOVE PACMAN UPON PRESSING ARROW KEYS
 function movingPacMan() {
   if (
@@ -102,6 +113,7 @@ function movingPacMan() {
     squares[pacManIndex].classList.add("pacman");
   }
   eatingPacdots();
+  eatingPowerpellet();
 }
 
 // ADDING PACMAN DIRECTIONS USING THE KEYBOARD KEYS
@@ -121,4 +133,5 @@ function controlKeys(event) {
   }
 }
 
-document.addEventListener("keydown", controlKeys);
+document.addEventListener("keyup", controlKeys);
+*/
