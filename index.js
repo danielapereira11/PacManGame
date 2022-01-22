@@ -66,3 +66,15 @@ function createBoard() {
 }
 
 createBoard();
+
+function createPlayers() {
+  //  ADDING PACMAN TO GAME BOARD
+  squares[490].classList.add("pacman");
+
+  //   ADDING GHOSTS TO GAME BOARD
+  squares[348].classList.add("clyde", "ghost");
+  squares[351].classList.add("inky", "ghost");
+  squares[406].classList.add("blinky", "ghost");
+  squares[403].classList.add("pinky", "ghost");
+}
+createPlayers();
