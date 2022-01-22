@@ -4,6 +4,7 @@ let squares = [];
 let width = 28;
 let score = 0;
 let pacManStartingIndex = 490;
+let direction;
 
 // SETTING A PREVIOUSLY DEFINED LAYOUT, THAT WILL BE ATTRIBUTED TO THE GAMEBOARD
 const layout = [
@@ -80,3 +81,17 @@ function createPlayers() {
   squares[377].classList.add("pinky", "ghost");
 }
 createPlayers();
+// ADDING PACMAN DIRECTIONS USING THE KEYBOARD KEYS
+function controlKeys(event) {
+  if (event.key === "ArrowLeft") {
+    direction = -1;
+  } else if (event.key === "ArrowRight") {
+    direction = 1;
+  } else if (event.key === "ArrowDown") {
+    direction = width;
+  } else if (event.key === "ArrowUp") {
+    direction = -width;
+  }
+}
+
+document.addEventListener("keydown", controlKeys);
