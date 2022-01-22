@@ -3,6 +3,7 @@ const grid = document.getElementById("grid");
 let squares = [];
 let width = 28;
 let score = 0;
+let pacManStartingIndex = 490;
 
 // SETTING A PREVIOUSLY DEFINED LAYOUT, THAT WILL BE ATTRIBUTED TO THE GAMEBOARD
 const layout = [
@@ -67,14 +68,15 @@ function createBoard() {
 
 createBoard();
 
+// CREATING THE GAME PLAYERS
 function createPlayers() {
   //  ADDING PACMAN TO GAME BOARD
-  squares[490].classList.add("pacman");
+  squares[pacManStartingIndex].classList.add("pacman");
 
   //   ADDING GHOSTS TO GAME BOARD
-  squares[348].classList.add("clyde", "ghost");
-  squares[351].classList.add("inky", "ghost");
-  squares[406].classList.add("blinky", "ghost");
-  squares[403].classList.add("pinky", "ghost");
+  squares[347].classList.add("clyde", "ghost");
+  squares[352].classList.add("inky", "ghost");
+  squares[407].classList.add("blinky", "ghost");
+  squares[377].classList.add("pinky", "ghost");
 }
 createPlayers();
