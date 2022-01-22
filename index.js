@@ -82,6 +82,15 @@ function createPlayers() {
 }
 createPlayers();
 
+// DEFINING WHAT HAPPENS WHEN PACMAN "EATS" A PACDOT
+function eatingPacdots() {
+  if (squares[pacManIndex].classList.contains("pacdots")) {
+    squares[pacManIndex].classList.remove("pacdots");
+    score++;
+    scoreBoard.innerHTML = score;
+  }
+}
+
 // MOVE PACMAN UPON PRESSING ARROW KEYS
 function movingPacMan() {
   if (
@@ -92,6 +101,7 @@ function movingPacMan() {
     pacManIndex += direction;
     squares[pacManIndex].classList.add("pacman");
   }
+  eatingPacdots();
 }
 
 // ADDING PACMAN DIRECTIONS USING THE KEYBOARD KEYS
