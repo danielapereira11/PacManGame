@@ -127,6 +127,30 @@ function movingGhosts(ghost) {
     } else {
       direction = directions[Math.floor(Math.random() * directions.length)];
     }
+
+    // DEFINING WHAT HAPPENS WHEN GHOST CATCHES PACMAN
+    if (squares[ghost.currentIndex].classList.contains("pacman")) {
+      // LOSE A LIFE
+      pacManLives--;
+      pacManLivesEl.innerHTML = pacManLives;
+      //   PACMAN RETURNS TO STARTING POSITION
+      squares[pacManIndex].classList.remove("pacman");
+      pacManIndex = 490;
+      squares[pacManIndex].classList.add("pacman");
+      //   GHOSTS RETURN TO STARTING POSITION
+      squares[ghost.currentIndex].classList.remove(
+        ghost.className,
+        "ghost",
+        "scared-ghost"
+      );
+      ghost.currentIndex = ghost.startingIndex;
+      squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
+      // DEFINING WHAT NEEDS TO HAPPEN TO LOSE GAME
+      if (pacManLives === 0) {
+        endGame();
+      }
+    }
+
     // DEFINING WHAT HAPPENS WHEN GHOST IS SCARED
     if (ghost.isScared === true) {
       squares[ghost.currentIndex].classList.remove(ghost.className);
@@ -153,6 +177,16 @@ ghosts.forEach((ghost) => movingGhosts(ghost));
 function unscareGhosts() {
   ghosts.forEach((ghost) => {
     ghost.isScared = false;
+  });
+}
+
+// DEFINING WHAT HAPPENS WHEN GAME IS LOST
+function endGame() {
+  document.querySelector("h1").innerHTML = "You LOSE 😫";
+  document.removeEventListener("keyup", controlKeys);
+  squares[pacManIndex].classList.remove("pacman");
+  ghosts.forEach((ghost) => {
+    clearInterval(ghost.timerId);
   });
 }
 
