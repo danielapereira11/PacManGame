@@ -165,7 +165,15 @@ function eatingPacdots() {
 
 // DEFINING WHAT HAPPENS WHEN PACMAN "EATS" A POWERPELLET
 function eatingPowerpellet() {
-  if (squares[pacManIndex].classList.contains("powerpellets")) {
+  // GETTING THE VALUE OF "ISSCARED" FOR EACH GHOST, SO THAT CAN BE USED IN THE IF STATEMENTE BELLOW
+  for (let i = 0; i < ghosts.length; i++) {
+    var isScaredNow = ghosts[i].isScared;
+  }
+
+  if (
+    squares[pacManIndex].classList.contains("powerpellets") &&
+    isScaredNow === false
+  ) {
     squares[pacManIndex].classList.remove("powerpellets");
     score += 10;
     scoreBoard.innerHTML = score;
