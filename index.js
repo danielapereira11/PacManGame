@@ -124,12 +124,22 @@ function movingGhosts(ghost) {
       squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
     } else {
       direction = directions[Math.floor(Math.random() * directions.length)];
-      console.log(direction);
+    }
+    // DEFINING WHAT HAPPENS WHEN GHOST IS SCARED
+    if (ghost.isScared === true) {
+      squares[ghost.currentIndex].classList.remove(ghost.className);
+      squares[ghost.currentIndex].classList.add("scared-ghost");
     }
     // SETTING THE MOVEMENTS TO GO AT THE GHOST.SPEED SPEED
   }, ghost.speed);
 }
 ghosts.forEach((ghost) => movingGhosts(ghost));
+
+function unscareGhosts() {
+  ghosts.forEach((ghost) => {
+    ghost.isScared = false;
+  });
+}
 
 // DEFINING WHAT HAPPENS WHEN PACMAN "EATS" A PACDOT
 function eatingPacdots() {
@@ -146,7 +156,8 @@ function eatingPowerpellet() {
     squares[pacManIndex].classList.remove("powerpellets");
     score += 10;
     scoreBoard.innerHTML = score;
-    // ghostIsScared = true; //Set this correctly when creating the class for Ghost and redifining them and then setting a timeout function to unscare ghosts
+    ghosts.forEach((ghost) => (ghost.isScared = true));
+    setTimeout(unscareGhosts, 10000);
   }
 }
 
@@ -160,7 +171,6 @@ function movingPacMan() {
     pacManIndex += direction;
     squares[pacManIndex].classList.add("pacman");
   }
-
   eatingPacdots();
   eatingPowerpellet();
 }
