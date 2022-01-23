@@ -1,5 +1,7 @@
 const scoreBoard = document.getElementById("score-el");
 const grid = document.getElementById("grid");
+const pacManLivesEl = document.getElementById("pacman-lives");
+let pacManLives = 3;
 let squares = [];
 let width = 28;
 let score = 0;
