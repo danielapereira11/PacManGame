@@ -14,12 +14,6 @@ h2 {
   text-align: center;
 }
 
-.container {
-  border: 3px solid yellow;
-  margin: 2rem auto;
-  max-width: 90%;
-}
-
 #grid {
   display: flex;
   flex-wrap: wrap;
