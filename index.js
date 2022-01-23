@@ -5,7 +5,6 @@ let width = 28;
 let score = 0;
 let pacManIndex = 490;
 let direction;
-// let ghostIsScared = false;
 
 // SETTING A PREVIOUSLY DEFINED LAYOUT, THAT WILL BE ATTRIBUTED TO THE GAMEBOARD
 const layout = [
@@ -79,6 +78,9 @@ class Ghost {
     this.className = className;
     this.startingIndex = startingIndex;
     this.speed = speed;
+    this.isScared = false;
+    this.currentIndex = startingIndex;
+    this.timerId = NaN;
   }
 }
 
@@ -91,11 +93,43 @@ let ghosts = [
 
 // ADDING GHOSTS TO GAMEBOARD
 function addingGhosts() {
-  ghosts.forEach((Ghost) => {
-    squares[Ghost.startingIndex].classList.add(Ghost.className, "ghost");
+  ghosts.forEach((ghost) => {
+    squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
   });
 }
 addingGhosts();
+
+// SETTING THE MOVEMENTS FOR THE GHOSTS
+
+function movingGhosts(ghost) {
+  // DEFINING THE DIRECTION IN WHICH TO MOVE THE GHOST
+  let directions = [+1, -1, +width, -width];
+  let direction = directions[Math.floor(Math.random() * directions.length)];
+
+  ghost.timerId = setInterval(function () {
+    // CHECKING THAT THE NEXT MOVE HAS NO WALLS OR OTHER GHOSTS
+    if (
+      !squares[ghost.currentIndex + direction].classList.contains("wall") &&
+      !squares[ghost.currentIndex + direction].classList.contains("ghost")
+    ) {
+      // REMOVING THE GHOST FROM CURRENT POSITION
+      squares[ghost.currentIndex].classList.remove(
+        ghost.className,
+        "ghost",
+        "scared-ghost"
+      );
+      //   ADDING THE RANDOM DIRECTION TO THE CURRENT INDEX
+      ghost.currentIndex += direction;
+      // ADDING THE GHOST TO NEXT POSITION
+      squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
+    } else {
+      direction = directions[Math.floor(Math.random() * directions.length)];
+      console.log(direction);
+    }
+    // SETTING THE MOVEMENTS TO GO AT THE GHOST.SPEED SPEED
+  }, ghost.speed);
+}
+ghosts.forEach((ghost) => movingGhosts(ghost));
 
 // DEFINING WHAT HAPPENS WHEN PACMAN "EATS" A PACDOT
 function eatingPacdots() {
@@ -126,6 +160,7 @@ function movingPacMan() {
     pacManIndex += direction;
     squares[pacManIndex].classList.add("pacman");
   }
+
   eatingPacdots();
   eatingPowerpellet();
 }
