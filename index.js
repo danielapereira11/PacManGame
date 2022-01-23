@@ -192,7 +192,7 @@ function endGame() {
 
 // DEFINING HOW GAME IS WON AND WHAT HAPPENS
 function winGame() {
-  if (score === 500) {
+  if (score >= 500) {
     document.querySelector("h1").innerHTML = "You WIN 🎉";
     document.removeEventListener("keyup", controlKeys);
     ghosts.forEach((ghost) => {
