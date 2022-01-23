@@ -70,18 +70,32 @@ function createBoard() {
 
 createBoard();
 
-// CREATING THE GAME PLAYERS
-function createPlayers() {
-  //  ADDING PACMAN TO GAME BOARD
-  squares[pacManIndex].classList.add("pacman");
+//  ADDING PACMAN TO GAME BOARD
+squares[pacManIndex].classList.add("pacman");
 
-  //   ADDING GHOSTS TO GAME BOARD
-  squares[347].classList.add("clyde", "ghost");
-  squares[352].classList.add("inky", "ghost");
-  squares[407].classList.add("blinky", "ghost");
-  squares[377].classList.add("pinky", "ghost");
+// CREATING THE GHOSTS
+class Ghost {
+  constructor(className, startingIndex, speed) {
+    this.className = className;
+    this.startingIndex = startingIndex;
+    this.speed = speed;
+  }
 }
-createPlayers();
+
+let ghosts = [
+  new Ghost("clyde", 347, 250),
+  new Ghost("inky", 352, 400),
+  new Ghost("blinky", 407, 300),
+  new Ghost("pinky", 377, 500),
+];
+
+// ADDING GHOSTS TO GAMEBOARD
+function addingGhosts() {
+  ghosts.forEach((Ghost) => {
+    squares[Ghost.startingIndex].classList.add(Ghost.className, "ghost");
+  });
+}
+addingGhosts();
 
 // DEFINING WHAT HAPPENS WHEN PACMAN "EATS" A PACDOT
 function eatingPacdots() {
