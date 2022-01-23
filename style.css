@@ -62,8 +62,8 @@ h2 {
 
 .ghost {
   border-radius: 50% 50% 15% 15%;
-  width: 20px;
-  height: 20px;
+  box-sizing: border-box;
+  border: none;
 }
 
 .clyde {
