@@ -170,6 +170,14 @@ function movingPacMan() {
     squares[pacManIndex].classList.remove("pacman");
     pacManIndex += direction;
     squares[pacManIndex].classList.add("pacman");
+  } else if (pacManIndex === 364 && direction === -1) {
+    squares[pacManIndex].classList.remove("pacman");
+    pacManIndex = 391;
+    squares[pacManIndex].classList.add("pacman");
+  } else if (pacManIndex === 391 && direction === 1) {
+    squares[pacManIndex].classList.remove("pacman");
+    pacManIndex = 364;
+    squares[pacManIndex].classList.add("pacman");
   }
   eatingPacdots();
   eatingPowerpellet();
