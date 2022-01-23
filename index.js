@@ -129,7 +129,20 @@ function movingGhosts(ghost) {
     if (ghost.isScared === true) {
       squares[ghost.currentIndex].classList.remove(ghost.className);
       squares[ghost.currentIndex].classList.add("scared-ghost");
+      //   DEFINING WHAT HAPPENS WHEN PACMAN EATS GHOST
+      if (squares[ghost.currentIndex].classList.contains("pacman")) {
+        score += 100;
+        scoreBoard.innerHTML = score;
+        squares[ghost.currentIndex].classList.remove(
+          ghost.className,
+          "ghost",
+          "scared-ghost"
+        );
+        ghost.currentIndex = ghost.startingIndex;
+        squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
+      }
     }
+
     // SETTING THE MOVEMENTS TO GO AT THE GHOST.SPEED SPEED
   }, ghost.speed);
 }
