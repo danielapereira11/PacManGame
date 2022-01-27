@@ -129,10 +129,10 @@ function movingGhosts(ghost) {
     }
 
     // DEFINING WHAT HAPPENS WHEN GHOST CATCHES PACMAN
-    if (squares[ghost.currentIndex].classList.contains("pacman")) {
-      // LOSE A LIFE
-      pacManLives--;
-      pacManLivesEl.innerHTML = pacManLives;
+    if (
+      squares[ghost.currentIndex].classList.contains("pacman") &&
+      ghost.isScared === false
+    ) {
       //   PACMAN RETURNS TO STARTING POSITION
       squares[pacManIndex].classList.remove("pacman");
       pacManIndex = 490;
@@ -145,6 +145,9 @@ function movingGhosts(ghost) {
       );
       ghost.currentIndex = ghost.startingIndex;
       squares[ghost.currentIndex].classList.add(ghost.className, "ghost");
+      // LOSE A LIFE
+      pacManLives--;
+      pacManLivesEl.innerHTML = pacManLives;
       // DEFINING WHAT NEEDS TO HAPPEN TO LOSE GAME
       if (pacManLives === 0) {
         endGame();
