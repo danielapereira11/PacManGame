@@ -80,7 +80,7 @@ class Ghost {
     this.className = className;
     this.startingIndex = startingIndex;
     this.speed = speed;
-    this.scaredSpeed = 900;
+    // this.scaredSpeed = 900;
     this.isScared = false;
     this.currentIndex = startingIndex;
     this.timerId = NaN;
@@ -274,4 +274,8 @@ function controlKeys(event) {
 }
 
 document.addEventListener("keyup", controlKeys);
+
+/*
+FUTURE WORK:
+MAKE THE GHOSTS GO SLOWER WHEN THE ARE SCARED (scaredSpeed)
 */
